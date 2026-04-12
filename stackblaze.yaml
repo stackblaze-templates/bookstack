@@ -1,0 +1,30 @@
+databases:
+  - name: bookstack-db
+    databaseName: bookstack
+    user: bookstack
+    type: mysql
+services:
+  - type: web
+    name: bookstack
+    runtime: docker
+    plan: starter
+    autoDeploy: false
+    envVars:
+      - key: APP_URL
+        value: https://bookstack.example.com
+      - key: DB_HOST
+        fromDatabase:
+          name: bookstack-db
+          property: host
+      - key: DB_DATABASE
+        fromDatabase:
+          name: bookstack-db
+          property: database
+      - key: DB_USERNAME
+        fromDatabase:
+          name: bookstack-db
+          property: user
+      - key: DB_PASSWORD
+        fromDatabase:
+          name: bookstack-db
+          property: password
