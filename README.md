@@ -99,6 +99,24 @@ flowchart LR
 
 ---
 
+## Security
+
+### Required environment variables
+
+Before running in production, **you must set** the following secrets. Copy `.env.example` to `.env` and replace every placeholder value:
+
+| Variable | Description |
+|---|---|
+| `DB_PASSWORD` | Password for the BookStack database user — must be strong and unique |
+| `MYSQL_ROOT_PASSWORD` | MySQL root password for the database container — must be strong and unique |
+| `APP_URL` | The public URL BookStack is served from (e.g. `https://wiki.example.com`) |
+
+> **⚠️ Production warning:** The default values in `.env.example` (e.g. `changeme_strong_password_here`) are **not** secure. Always replace them with randomly generated secrets before deploying. Never commit your `.env` file to version control.
+
+BookStack's first-run setup creates an admin account with the email `admin@admin.com` and password `password`. **Change these credentials immediately after first login.**
+
+---
+
 ### Maintained by [StackBlaze](https://stackblaze.com)
 
 This template is actively maintained by StackBlaze. We perform **weekly automated checks** to ensure:

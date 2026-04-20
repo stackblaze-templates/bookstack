@@ -1,23 +1,23 @@
 services:
   bookstack:
-    image: lscr.io/linuxserver/bookstack:latest
+    image: lscr.io/linuxserver/bookstack:25.05
     ports:
       - "6875:6875"
     environment:
-      - APP_URL=http://localhost:6875
+      - APP_URL=${APP_URL:-http://localhost:6875}
       - DB_HOST=db
-      - DB_DATABASE=bookstack
-      - DB_USERNAME=bookstack
-      - DB_PASSWORD=bookstack
+      - DB_DATABASE=${DB_DATABASE:-bookstack}
+      - DB_USERNAME=${DB_USERNAME:-bookstack}
+      - DB_PASSWORD=${DB_PASSWORD:?DB_PASSWORD must be set}
     depends_on:
       - db
   db:
     image: mysql:8.0
     environment:
-      MYSQL_DATABASE: bookstack
-      MYSQL_USER: bookstack
-      MYSQL_PASSWORD: bookstack
-      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: ${DB_DATABASE:-bookstack}
+      MYSQL_USER: ${DB_USERNAME:-bookstack}
+      MYSQL_PASSWORD: ${DB_PASSWORD:?DB_PASSWORD must be set}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:?MYSQL_ROOT_PASSWORD must be set}
     volumes:
       - db_data:/var/lib/mysql
 volumes:
